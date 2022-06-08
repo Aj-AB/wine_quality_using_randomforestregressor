@@ -7,14 +7,16 @@ jobs:
     # container: docker://ghcr.io/iterative/cml:0-dvc2-base1
     steps:
       - uses: actions/checkout@v2
-        run: |
-        pip install -r requirements.txt
-          python train.py
-      - name: Write CML report
+      - name: cml_rum
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-        echo "MODEL METRICS"
-        cat metrics.txt
+          run: |
+            # ML workflow
+            pip install -r requirements.txt
+            python train.py
+  
+            
+            echo "MODEL METRICS"
+            cat metrics.txt
           #cat results.txt >> report.md
           #cml send-comment report.md
